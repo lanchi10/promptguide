@@ -79,10 +79,135 @@
             color: white;
             padding: 30px;
             border-radius: 15px;
-            margin-bottom: 40px;
+            margin-bottom: 25px;
             text-align: center;
             font-size: 20px;
             box-shadow: 0 10px 30px rgba(240, 147, 251, 0.3);
+        }
+
+        .banner-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            padding: 35px;
+            margin-bottom: 40px;
+            box-shadow: 0 15px 50px rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .banner-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 50%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .banner-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .banner-text {
+            color: white;
+        }
+
+        .banner-text h3 {
+            font-size: clamp(24px, 4vw, 32px);
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .banner-text p {
+            font-size: clamp(16px, 3vw, 20px);
+            margin-bottom: 20px;
+            opacity: 0.95;
+        }
+
+        .banner-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .banner-features span {
+            background: rgba(255,255,255,0.2);
+            padding: 8px 15px;
+            border-radius: 25px;
+            font-size: 14px;
+            border: 1px solid rgba(255,255,255,0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .banner-cta {
+            text-align: center;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+            color: white;
+            text-decoration: none;
+            padding: 20px 30px;
+            border-radius: 15px;
+            font-weight: bold;
+            font-size: clamp(16px, 3vw, 20px);
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255,255,255,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.6);
+        }
+
+        .cta-button small {
+            display: block;
+            font-size: 12px;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .banner-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 25px;
+            }
+            
+            .banner-features {
+                justify-content: center;
+            }
         }
 
         .section {
@@ -364,6 +489,26 @@
             <strong>🔑 מה הופך פרומפט לבלתי מנוצח?</strong><br>
             פרומפט מושלם הוא המפתח לקבלת תגובות מדויקות ומועילות מבינה מלאכותית. 
             הוא מאפשר שיחות משמעותיות ותגובות מהירות המגבירות פרודוקטיביות.
+        </div>
+
+        <div class="banner-box">
+            <div class="banner-content">
+                <div class="banner-text">
+                    <h3>🚀 רוצים להתחיל מיד?</h3>
+                    <p>גלו את האוסף המלא של 60 פרומפטים מוכנים לשימוש!</p>
+                    <div class="banner-features">
+                        <span>✨ פרומפטים מקצועיים</span>
+                        <span>⚡ מוכנים לשימוש מיידי</span>
+                        <span>🎯 לכל תחום</span>
+                    </div>
+                </div>
+                <div class="banner-cta">
+                    <a href="https://60prompts.netlify.app/" target="_blank" class="cta-button">
+                        <span>🎨 60 פרומפטים מוכנים</span>
+                        <small>לחץ לגישה מיידית</small>
+                    </a>
+                </div>
+            </div>
         </div>
 
         <div class="section">
