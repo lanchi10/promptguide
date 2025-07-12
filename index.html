@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>המדריך האולטימטיבי לכתיבת פרומפטים מושלמים</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-size: 18px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 30px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: 50px 50px;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-100px); }
+        }
+
+        .header h1 {
+            font-size: clamp(28px, 5vw, 48px);
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: clamp(16px, 3vw, 22px);
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .intro-box {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            text-align: center;
+            font-size: 20px;
+            box-shadow: 0 10px 30px rgba(240, 147, 251, 0.3);
+        }
+
+        .section {
+            margin-bottom: 50px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-right: 5px solid #667eea;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            font-size: clamp(24px, 4vw, 32px);
+            color: #2c3e50;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .emoji {
+            font-size: clamp(28px, 4vw, 36px);
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .principle {
+            background: white;
+            margin-bottom: 25px;
+            padding: 25px;
+            border-radius: 12px;
+            border-right: 4px solid #4ecdc4;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+
+        .principle:hover {
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transform: translateX(-5px);
+        }
+
+        .principle-title {
+            font-size: clamp(18px, 3vw, 24px);
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .principle-number {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .example-box {
+            background: #e8f5e8;
+            border: 2px solid #4caf50;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            position: relative;
+        }
+
+        .example-box::before {
+            content: "✅";
+            position: absolute;
+            top: -10px;
+            right: 15px;
+            background: #4caf50;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 14px;
+        }
+
+        .bad-example {
+            background: #ffe8e8;
+            border: 2px solid #f44336;
+        }
+
+        .bad-example::before {
+            content: "❌";
+            background: #f44336;
+        }
+
+        .code-block {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            border-right: 4px solid #e74c3c;
+        }
+
+        .formula-box {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(252, 182, 159, 0.3);
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .tip-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            border-top: 4px solid #667eea;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .tip-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .do-dont {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .do-box {
+            background: #e8f5e8;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #4caf50;
+        }
+
+        .dont-box {
+            background: #ffe8e8;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #f44336;
+        }
+
+        .summary-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin-top: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .summary-box::before {
+            content: '🏆';
+            font-size: 100px;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            opacity: 0.1;
+        }
+
+        .floating-button {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .floating-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                padding: 15px;
+                border-radius: 15px;
+            }
+            
+            .header {
+                padding: 40px 20px;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+            
+            .do-dont {
+                grid-template-columns: 1fr;
+            }
+            
+            .tips-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .floating-button {
+                bottom: 20px;
+                left: 20px;
+                padding: 12px 16px;
+                font-size: 14px;
+            }
+        }
+
+        .accessibility-note {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 16px;
+        }
+
+        /* הגדלת גופן בלחיצה */
+        .large-text {
+            font-size: 1.2em !important;
+        }
+
+        .extra-large-text {
+            font-size: 1.4em !important;
+        }
+
+        /* גבול דק יותר */
+        .high-contrast {
+            filter: contrast(1.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 המדריך האולטימטיבי לכתיבת פרומפטים מושלמים</h1>
+            <p>מדריך פשוט ונגיש לכל הגילאים - מילדים עד קשישים</p>
+        </div>
+
+        <div class="intro-box">
+            <strong>🔑 מה הופך פרומפט לבלתי מנוצח?</strong><br>
+            פרומפט מושלם הוא המפתח לקבלת תגובות מדויקות ומועילות מבינה מלאכותית. 
+            הוא מאפשר שיחות משמעותיות ותגובות מהירות המגבירות פרודוקטיביות.
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">
+                <span class="emoji">🚀</span>
+                12 העקרונות הזהב לכתיבת פרומפטים
+            </h2>
+
+            <div class="principle">
+                <div class="principle-title">
+                    <span class="principle-number">1</span>
+                    התחל בפועל פעולה
+                </div>
+                <div class="bad-example">
+                    <strong>רע:</strong> "האם תוכל לעזור לי עם..."
+                </div>
+                <div class="example-box">
+                    <strong>מושלם:</strong> "צור / כתוב / הכן / פתח / נתח..."
+                </div>
+                <p><strong>דוגמה:</strong></p>
+                <ul>
+                    <li>במקום: "האם תוכל לומר לי איך להפוך למנהל שיווק?"</li>
+                    <li>כתוב: "צור תוכנית קריירה מפורטת להפיכה למנהל שיווק ב-2025"</li>
+                </ul>
+            </div>
+
+            <div class="principle">
+                <div class="principle-title">
+                    <span class="principle-number">2</span>
+                    ספק הקשר עשיר
+                </div>
+                <p>כמו רופא שצריך תסמינים לאבחון, AI צריך הקשר לתגובה רלוונטית.</p>
+                <div class="code-block">יש לי 3 שנות ניסיון כמפתח תוכנה. עכשיו נמאס לי מתכנות 
+ואני רוצה לעבור לקריירה אחרת. ההשכלה שלי היא תואר ראשון 
+במדעי המחשב, ואני בקיא בהבנת הצד העסקי של תוכנה. 
+הצע רשימה של אפשרויות קריירה שיהיה לי קל לעבור אליהן.</div>
+            </div>
+
+            <div class="principle">
+                <div class="principle-title">
+                    <span class="principle-number">3</span>
+                    השתמש במשחק תפקידים
+                </div>
+                <p>הפוך את ה-AI למומחה בתחום הספציפי.</p>
+                <div class="code-block">אתה ותיק בשיווק מוצרי תוכנה עם 15 שנות ניסיון. 
+בנית אסטרטגיות שיווק למוצרי תוכנה מצליחים כמו Salesforce, 
+HubSpot ו-Slack. בהתבסס על ניסיונך, יעץ לי כיצד לבנות 
+מודעות למוצר ה-CRM החדש שלי.</div>
+            </div>
+
+            <div class="principle">
+                <div class="principle-title">
+                    <span class="principle-number">4</span>
+                    השתמש בהפניות וסגנון
+                </div>
+                <p>רוצה לחקות סגנון כתיבה מסוים? ציין זאת במפורש.</p>
+                <div class="example-box">
+                    כתוב מאמר על יעילות בעבודה בסגנון של טים פריס 
+                    (The 4-Hour Workweek) - פרקטי, עם טיפים קונקרטיים ומספרים.
+                </div>
+            </div>
+
+            <div class="principle">
+                <div class="principle-title">
+                    <span class="principle-number">5</span>
+                    הדגש באמצעות מירכאות
+                </div>
+                <p><span class="highlight">"מילות מפתח"</span> במירכאות מקבלות דגש מיוחד.</p>
+                <ul>
+                    <li>רגיל: כתוב על שיווק תוכן</li>
+                    <li>מושבח: כתוב על <strong>"שיווק תוכן"</strong> כאסטרטגיה עסקית</li>
+                </ul>
+            </div>
+
+            <div class="principle">
+                <div class="principle-title">
+                    <span class="principle-number">6</span>
+                    היה ספציפי מאוד
+                </div>
+                <p>עמימות = תוצאות גרועות. פרטים = תוצאות מדהימות.</p>
+                <div class="bad-example">
+                    <strong>מעורפל:</strong> "עזור לי עם שיווק"
+                </div>
+                <div class="example-box">
+                    <strong>ספציפי:</strong> "צור אסטרטגיית שיווק למוצר SaaS חדש המיועד לחברות סטארט-אפ בתחום הפינטק, כולל 5 ערוצי שיווק, תקציב של 50,000 שקל לחודש, וKPI למדידת הצלחה"
+                </div>
+            </div>
+
+            <div class="principle">
+                <div class="principle-title">
+                    <span class="principle-number">7</span>
+                    השתמש בדוגמאות
+                </div>
+                <p>דוגמה טובה שווה אלף הסברים.</p>
+                <div class="code-block">הנה דוגמה לפוסט LinkedIn מוצלח שלי:
+"[הכנס דוגמה]"
+
+כתוב 5 פוסטים נוספים באותו סגנון על נושא ניהול זמן.</div>
+            </div>
+
+            <div class="principle">
+                <div class="principle-title">
+                    <span class="principle-number">8</span>
+                    ציין את אורך התגובה
+                </div>
+                <ul>
+                    <li>"בכ-300 מילים"</li>
+                    <li>"רשימה של 10 נקודות"</li>
+                    <li>"תגובה קצרה של 2-3 משפטים"</li>
+                    <li>"מדריך מפורט של 1,500 מילים"</li>
+                </ul>
+            </div>
+
+            <div class="principle">
+                <div class="principle-title">
+                    <span class="principle-number">9</span>
+                    החזק את היד של ה-AI
+                </div>
+                <p>תן הנחיות ברורות: מה לעשות, ממה להימנע, מה לתעדף.</p>
+                <div class="code-block">צור תוכנית תזונה של 1,800 קלוריות לגבר בן 35 שרוצה לרדת 10 ק"ג:
+- בלי גלוטן
+- כולל 3 ארוחות ו-2 חטיפים
+- 40% חלבון, 30% פחמימות, 30% שומן
+- עם מחירים משוערים
+- מתאים לישראל</div>
+            </div>
+
+            <div class="principle">
+                <div class="principle-title">
+                    <span class="principle-number">10</span>
+                    אל תהסס לחדד
+                </div>
+                <p>אימון מביא לידי שלמות. חדד את הפרומפט לפי הצורך.</p>
+                <ul>
+                    <li><strong>פרומפט ראשון:</strong> "כתוב תוכנית עסקית"</li>
+                    <li><strong>חידוד:</strong> "הוסף ניתוח תחרות מפורט"</li>
+                    <li><strong>חידוד נוסף:</strong> "כלול גם הערכת סיכונים ותוכנית חירום"</li>
+                </ul>
+            </div>
+
+            <div class="principle">
+                <div class="principle-title">
+                    <span class="principle-number">11</span>
+                    ציין את הטון
+                </div>
+                <ul>
+                    <li><strong>פורמלי:</strong> "כתוב במסגרת עסקית מקצועית"</li>
+                    <li><strong>ידידותי:</strong> "כתוב בטון חם ונגיש"</li>
+                    <li><strong>נלהב:</strong> "כתוב בהתרגשות ואנרגיה"</li>
+                    <li><strong>מדעי:</strong> "כתוב בטון אקדמי עם מקורות"</li>
+                </ul>
+            </div>
+
+            <div class="principle">
+                <div class="principle-title">
+                    <span class="principle-number">12</span>
+                    בקש סיכום לשיחות ארוכות
+                </div>
+                <div class="example-box">
+                    "סכם את השיחה שלנו בנקודות העיקריות ובפעולות הבאות שעלי לבצע"
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">
+                <span class="emoji">🎨</span>
+                נוסחאות מנצחות
+            </h2>
+            
+            <div class="tips-grid">
+                <div class="formula-box">
+                    <h3>📝 נוסחת CLEAR</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li><strong>C</strong>ontext (הקשר)</li>
+                        <li><strong>L</strong>ength (אורך)</li>
+                        <li><strong>E</strong>xample (דוגמה)</li>
+                        <li><strong>A</strong>ction (פעולה)</li>
+                        <li><strong>R</strong>ole (תפקיד)</li>
+                    </ul>
+                </div>
+                
+                <div class="formula-box">
+                    <h3>🎯 נוסחת CRISP</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li><strong>C</strong>ontext (הקשר)</li>
+                        <li><strong>R</strong>ole (תפקיד)</li>
+                        <li><strong>I</strong>nstructions (הנחיות)</li>
+                        <li><strong>S</strong>tyle (סגנון)</li>
+                        <li><strong>P</strong>arameters (פרמטרים)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">
+                <span class="emoji">💡</span>
+                טיפים מתקדמים
+            </h2>
+            
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h3>🔗 שימוש בשרשרת מחשבות</h3>
+                    <div class="code-block">חשוב על הבעיה הזו צעד אחר צעד:
+1. ראשית, נתח את הבעיה
+2. אחר כך, זהה פתרונות אפשריים
+3. לבסוף, המלץ על הפתרון הטוב ביותר</div>
+                </div>
+                
+                <div class="tip-card">
+                    <h3>🎭 טכניקת הפספוס</h3>
+                    <div class="code-block">אני אספר לך על [נושא] ואתה תספר לי מה אני פספסתי 
+או איך אני יכול לשפר את הגישה שלי.</div>
+                </div>
+                
+                <div class="tip-card">
+                    <h3>📊 השוואה מובנית</h3>
+                    <div class="code-block">השווה בין [אפשרות א'] ל-[אפשרות ב'] בטבלה עם הקריטריונים הבאים:
+- עלות, זמן, יעילות, קלות יישום</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">
+                <span class="emoji">🎯</span>
+                דברים שחשוב לזכור
+            </h2>
+            
+            <div class="do-dont">
+                <div class="do-box">
+                    <h3>✅ עושים:</h3>
+                    <ul>
+                        <li>מתחילים בפועל פעולה</li>
+                        <li>נותנים הקשר מספק</li>
+                        <li>מציינים אורך רצוי</li>
+                        <li>מספקים דוגמאות</li>
+                        <li>מחדדים לפי הצורך</li>
+                    </ul>
+                </div>
+                
+                <div class="dont-box">
+                    <h3>❌ לא עושים:</h3>
+                    <ul>
+                        <li>לא מתחילים ב"האם תוכל"</li>
+                        <li>לא כותבים פרומפטים עמומים</li>
+                        <li>לא שוכחים לציין טון</li>
+                        <li>לא מציפים ציפיות לא מציאותיות</li>
+                        <li>לא מוותרים אחרי נסיון ראשון</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="summary-box">
+            <h2 style="margin-bottom: 20px;">🏆 המפתח להצלחה</h2>
+            <p style="font-size: 20px; margin-bottom: 15px;">
+                <strong>זכרו:</strong> פרומפט מושלם = תוצאות מושלמות
+            </p>
+            <p style="font-size: 18px;">
+                השקיעו זמן ביצירת הפרומפט כמו שהייתם משקיעים בכתיבת אימייל חשוב למנכ"ל. 
+                האיכות שלכם קובעת את האיכות של התשובה.
+            </p>
+            <p style="font-size: 22px; margin-top: 20px; font-weight: bold;">
+                <span class="highlight">תרגלו, חדדו, שפרו - וזה הסוד לשליטה באמנות הפרומפט המושלם!</span>
+            </p>
+        </div>
+
+        <div class="accessibility-note">
+            <strong>💡 הערה לנגישות:</strong> השתמשו בכפתור הצף למטה כדי להגדיל את הגופן או להגביר את הניגודיות לנוחותכם.
+        </div>
+    </div>
+
+    <button class="floating-button" id="accessibilityBtn" onclick="toggleAccessibility()">
+        🔍 נגישות
+    </button>
+
+    <script>
+        let accessibilityLevel = 0;
+        
+        function toggleAccessibility() {
+            const body = document.body;
+            
+            accessibilityLevel = (accessibilityLevel + 1) % 3;
+            
+            // איפוס כל הקלאסים
+            body.classList.remove('large-text', 'extra-large-text', 'high-contrast');
+            
+            switch(accessibilityLevel) {
+                case 1:
+                    body.classList.add('large-text');
+                    break;
+                case 2:
+                    body.classList.add('extra-large-text', 'high-contrast');
+                    break;
+                default:
+                    // רגיל
+                    break;
+            }
+        }
+
+        // חזרה לתחילת הדף בלחיצה על הכותרת
+        document.querySelector('.header h1').addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // אנימציה לכרטיסים כשנכנסים לתצוגה
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // הוספת אנימציה לכל הסקשנים
+        document.querySelectorAll('.section, .principle, .tip-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // פונקציה להדגשת טקסט חשוב
+        function highlightImportantText() {
+            const importantWords = ['מושלם', 'חשוב', 'ספציפי', 'דוגמה', 'הקשר'];
+            const textNodes = document.createTreeWalker(
+                document.body,
+                NodeFilter.SHOW_TEXT,
+                null,
+                false
+            );
+            
+            let node;
+            while (node = textNodes.nextNode()) {
+                let text = node.textContent;
+                let hasImportantWord = false;
+                
+                importantWords.forEach(word => {
+                    if (text.includes(word) && !hasImportantWord) {
+                        hasImportantWord = true;
+                    }
+                });
+                
+                if (hasImportantWord && node.parentElement.tagName !== 'SCRIPT') {
+                    importantWords.forEach(word => {
+                        text = text.replace(new RegExp(word, 'g'), `<mark style="background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%); padding: 2px 4px; border-radius: 3px;">${word}</mark>`);
+                    });
+                    node.parentElement.innerHTML = node.parentElement.innerHTML.replace(node.textContent, text);
+                }
+            }
+        }
+
+        // הפעלת ההדגשה לאחר טעינת הדף
+        setTimeout(highlightImportantText, 1000);
+
+        // הוספת tooltips לכפתורים
+        document.getElementById('accessibilityBtn').title = 'לחץ להגדלת טקסט ושיפור ניגודיות';
+
+        // הוספת קיצורי מקלדת לנגישות
+        document.addEventListener('keydown', function(e) {
+            // Ctrl + Plus להגדלת טקסט
+            if (e.ctrlKey && (e.key === '+' || e.key === '=')) {
+                e.preventDefault();
+                toggleAccessibility();
+            }
+            
+            // Escape לחזרה לתחילת הדף
+            if (e.key === 'Escape') {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        });
+
+        // הודעת הצלחה בטעינת הדף
+        window.addEventListener('load', function() {
+            console.log('✅ המדריך נטען בהצלחה! השתמש בכפתור הנגישות למטה לנוחותך');
+        });
+    </script>
+</body>
+</html>
